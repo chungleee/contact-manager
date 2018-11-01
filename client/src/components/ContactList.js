@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import Contact from './Contact';
 
 class ContactList extends Component {
@@ -29,7 +29,7 @@ class ContactList extends Component {
   render() {
     const { contacts } = this.state
     return (
-      <div>
+      <Fragment>
         {
           contacts.map((contact) => {
             return <Contact 
@@ -38,7 +38,7 @@ class ContactList extends Component {
           />
           })
         }
-      </div>
+      </Fragment>
     )
   }
 }
