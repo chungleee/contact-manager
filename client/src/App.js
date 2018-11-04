@@ -5,6 +5,7 @@ import Header from './components/Header';
 import ContactList from './components/ContactList';
 
 import { Provider } from './context'
+import AddContact from './components/AddContact';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <div className="App">
           <Header branding='Contact Manager' />
           <div className="container">
+            <AddContact />
             <ContactList />
           </div>
         </div>
