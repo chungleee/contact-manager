@@ -7,20 +7,22 @@ class ContactList extends Component {
     return (
       <Consumer>
         {
-          ({contacts}) => {
+          (value) => {
+            const {contacts} = value
             return (
               <Fragment>
                 {
                   contacts.map((contact) => {
-                    return <Contact 
-                    key={contact.id}
-                    contact={contact}
-                  />
+                    return <Contact
+                      key={contact.id}
+                      contact={contact}
+                    />
                   })
                 }
               </Fragment>
             )
           }
+          
         }
       </Consumer>
     )

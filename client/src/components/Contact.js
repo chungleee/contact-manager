@@ -18,7 +18,6 @@ class Contact extends Component {
     dispatch({type: 'DELETE_CONTACT', payload: id})
   }
   
-  
   render() {
     // destructuring
     const { id, name, email, phone } = this.props.contact
@@ -40,9 +39,9 @@ class Contact extends Component {
                   >
                   </i>
                   <i 
-                    onClick={this.onDeleteClick.bind(this, id, dispatch)}
                     className="fas fa-times"
                     style={{cursor: "pointer", float: 'right', color: 'red'}}
+                    onClick={this.onDeleteClick.bind(this, id, dispatch)}
                   >
                   </i>
                 </h4>
