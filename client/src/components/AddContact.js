@@ -17,6 +17,27 @@ class AddContact1 extends Component {
       [event.target.name]: event.target.value
     })
   }
+
+  validateFields = ({name, email, phone}) => {
+    let errors = {}
+
+    if(isEmpty(name)) {
+      errors.name = 'Name is required'
+    }
+
+    if(isEmpty(email)) {
+      errors.email = 'Email is required'
+    }
+
+    if(isEmpty(phone)) {
+      errors.phone = 'Phone is required'
+    }
+
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    }
+  }
   
   onSubmitHandler = (dispatch, event) => {
     // prevent default refresh on submission
@@ -25,23 +46,11 @@ class AddContact1 extends Component {
     // destructuring
     const { name, email, phone } = this.state
 
-    // check for errors
-    if(isEmpty(name)) {
-      this.setState({
-        errors: { name: 'Name is required'}
-      })
-      return
-    }
-    if(isEmpty(email)) {
-      this.setState({
-        errors: { email: 'Email is required'}
-      })
-      return
-    }
-    if(isEmpty(phone)) {
-      this.setState({
-        errors: { phone: 'Phone is required'}
-      })
+    // // check for errors
+    const { errors, isValid } = this.validateFields(this.state)
+
+    if(!isValid) {
+      this.setState({ errors })
       return
     }
 
