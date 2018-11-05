@@ -9,6 +9,8 @@ import NotFound from './components/pages/NotFound'
 
 import { Provider } from './context'
 import AddContact from './components/AddContact';
+import EditContact from './components/EditContact';
+import Test from './components/Test';
 
 class App extends Component {
   render() {
@@ -29,10 +31,20 @@ class App extends Component {
                   path='/contact/add'
                   component={AddContact}
                 />
+                <Route 
+                  exact
+                  path='/contact/edit/:id'
+                  component={EditContact}
+                />
                 <Route
                   exact
                   path='/about'
                   component={About}
+                />
+                <Route 
+                  exact
+                  path='/test'
+                  component={Test}
                 />
                 <Route component={NotFound} />
               </Switch>

@@ -4,12 +4,23 @@ import { Consumer } from '../context';
 import TextInputGroup from './TextInputGroup';
 import isEmpty from 'is-empty'
 
-class AddContact1 extends Component {
+class EditContact extends Component {
   state = {
     name: '',
     email: '',
     phone: '',
     errors: {}
+  }
+
+  async componentDidMount() {
+    const { id } = this.props.match.params
+    const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+    const {name, email, phone} = res.data
+    this.setState({
+      name, 
+      email, 
+      phone
+    })
   }
 
   onChangeHandler = (event) => {
@@ -45,6 +56,7 @@ class AddContact1 extends Component {
 
     // destructuring
     const { name, email, phone } = this.state
+    const { id } = this.props.match.params
 
     // // check for errors
     const { errors, isValid } = this.validateFields(this.state)
@@ -54,13 +66,16 @@ class AddContact1 extends Component {
       return
     }
 
-    // construct new contact
-    const newContact = { name, email, phone }
+    const updateContact = {
+      name, 
+      email, 
+      phone
+    }
 
-    // post req
-    const res = await axios.post('https://jsonplaceholder.typicode.com/users', newContact)
-    dispatch({type: 'ADD_CONTACT', payload: res.data})
-    // dispatch 
+    const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updateContact)
+
+    dispatch({type: 'UPDATE_CONTACT', payload: res.data })
+
 
     // clear input fields
     this.setState({
@@ -84,7 +99,7 @@ class AddContact1 extends Component {
             const { dispatch } = value
             return (
               <div className="card mb-3">
-                <div className="card-header">Add Contact</div>
+                <div className="card-header">Edit Contact</div>
                 <div className="card-body">
                   <form onSubmit={this.onSubmitHandler.bind(this, dispatch)}>
                     <TextInputGroup
@@ -115,7 +130,7 @@ class AddContact1 extends Component {
                     <button 
                       className='btn btn-block' 
                       type="submit"
-                    >Add Contact</button>
+                    >Update Contact</button>
                   </form>
                 </div>
               </div>
@@ -127,4 +142,4 @@ class AddContact1 extends Component {
   }
 }
 
-export default AddContact1
+export default EditContact
