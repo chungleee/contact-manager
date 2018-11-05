@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import Header from './components/Header';
 import ContactList from './components/ContactList';
+import About from './components/pages/About'
+import NotFound from './components/pages/NotFound'
 
 import { Provider } from './context'
 import AddContact from './components/AddContact';
@@ -11,13 +14,31 @@ class App extends Component {
   render() {
     return (
       <Provider>
-        <div className="App">
-          <Header branding='Contact Manager' />
-          <div className="container">
-            <AddContact />
-            <ContactList />
+        <Router>
+          <div className="App">
+            <Header branding='Contact Manager' />
+            <div className="container">
+              <Switch>
+                <Route 
+                  exact 
+                  path='/' 
+                  component={ContactList}
+                />
+                <Route 
+                  exact
+                  path='/contact/add'
+                  component={AddContact}
+                />
+                <Route
+                  exact
+                  path='/about'
+                  component={About}
+                />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
           </div>
-        </div>
+        </Router>
       </Provider>
     );
   }
