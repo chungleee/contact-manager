@@ -2,9 +2,11 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://chunglee.github.io/contact-manager",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
+    "gh-pages": "^2.0.1",
     "is-empty": "^1.2.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -13,6 +15,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
+    "deploy": "yarn run build && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
